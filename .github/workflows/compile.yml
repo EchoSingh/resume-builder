@@ -4,34 +4,38 @@ on:
   push:
     paths:
       - 'data/resume.tex'
-      - 'Dockerfile' 
+      - 'Dockerfile'
+  workflow_dispatch:  
 
 jobs:
-  generate_cv_job:
+  generate_cv:
+    name: Generate Resume PDF
     runs-on: ubuntu-latest
-    name: A job to generate CV pdf on push
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      - name: Run CV generation
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run CV Generation Action
         uses: ./
 
-      - name: Commit files
+      - name: Commit Changes
         id: commit
+        shell: bash
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
           git add --all
+          
           if [ -z "$(git status --porcelain)" ]; then
-            echo "::set-output name=push::false"
+            echo "No changes to commit."
+            echo "push=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Updated Resume via GH Actions." -a
-            echo "::set-output name=push::true"
+            git commit -m "Updated Resume via GitHub Actions"
+            echo "push=true" >> "$GITHUB_OUTPUT"
           fi
-        shell: bash
 
-      - name: Push changes
+      - name: Push Changes
         if: steps.commit.outputs.push == 'true'
         uses: ad-m/github-push-action@master
         with:
