@@ -1,105 +1,108 @@
-# 📄 Resume
+# Resume 📄
 
-Welcome to my **Resume** repository! This project compiles my resume using LaTeX and GitHub Actions for automation, ensuring a professional and polished PDF output.
+This repository contains a LaTeX-based resume with an automated PDF build process using GitHub Actions and Docker. It ensures consistent formatting, reproducible builds, and clean version control.
 
-## 🚀 Features
+---
 
-- 🖋️ Written in LaTeX for high-quality typesetting.
-- 🔄 Automated compilation using GitHub Actions.
-- 🐳 Dockerized environment for consistent builds.
-- 📂 Organized project structure for easy maintenance.
+## Features
 
-## 📂 Project Structure
+* Written in LaTeX for high-quality typesetting
+* Automatically compiled via GitHub Actions
+* Dockerized for consistent, dependency-free builds
+* Organized project layout for easy maintenance and clarity
 
-```bash
+---
+
+## Project Structure
+
+```
 resume/
 ├── .github/
 │   └── workflows/
-│       └── compile.yml      
+│       └── compile.yml
 ├── data/
-    └── resume.tex                
+│   └── resume.tex
+├── assets/
+│   └── image.png
 ├── out/
-    └── resume.aux
-    └── resume.log
-    └── resume.out
-    └── resume.pdf                        
-├── Dockerfile                
-├── action.yml                
+│   └── resume.aux
+│   └── resume.log
+│   └── resume.out
+│   └── resume.pdf
+├── Dockerfile
+├── action.yml
 └── README.md
 ```
- # 🛠️ Usage
 
-## 🐳 Using Docker
+---
 
-1. **Build the Docker image:**
+## Usage
 
-    ```sh
-    docker build -t resume-builder .
-    ```
+### Using Docker
 
-2. **Run the Docker container:**
+Update the `Dockerfile` to reference the correct input files:
 
-    ```sh
-    docker run --rm -v $(pwd):/usr/src/app resume-builder
-    ```
+```dockerfile
+COPY data/resume.tex .
+COPY data/icon-image.png .
+```
 
-## 💻 Using GitHub Actions
+Then build and run the container:
 
-1. **Push changes to the repository:**
+```sh
+docker build -t resume-builder .
+docker run --rm -v $(pwd):/usr/src/app resume-builder
+```
 
-    ```sh
-    git add .
-    git commit -m "Update resume"
-    git push origin main
-    ```
+This process compiles the resume inside an isolated environment and outputs the PDF to the `out/` directory.
 
-2. **GitHub Actions will automatically compile your resume and update `resume.pdf` in the `out/` directory.**
+---
 
-## 📦 Direct Compilation (Local Environment)
+### Using GitHub Actions
 
-1. **Install LaTeX (e.g., TeX Live, MiKTeX).**
+1. Edit `data/resume.tex`
 
-2. **Compile the LaTeX source file:**
+2. Commit and push your changes:
 
-    ```sh
-    pdflatex resume.tex
-    ```
+   ```sh
+   git add data/resume.tex
+   git commit -m "Update resume"
+   git push origin main
+   ```
 
-# 🤝 Contributing
+3. GitHub Actions will:
 
-Contributions are welcome! Feel free to submit issues and pull requests.
+   * Compile the LaTeX source
+   * Place the updated PDF in the `out/` directory
+   * Commit and push the updated PDF if necessary
 
-1. **Fork the repository.**
+---
 
-2. **Create your feature branch:**
+### Local Compilation (Without Docker)
 
-    ```sh
-    git checkout -b feature/my-new-feature
-    ```
+1. Ensure you have a LaTeX distribution installed (e.g., TeX Live, MiKTeX)
+2. Compile manually:
 
-3. **Commit your changes:**
+   ```sh
+   pdflatex -output-directory=out data/resume.tex
+   ```
 
-    ```sh
-    git commit -am 'Add some feature'
-    ```
+---
 
-4. **Push to the branch:**
-
-    ```sh
-    git push origin feature/my-new-feature
-    ```
-
-
-# 📜 License
+## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-# 🌟 Acknowledgements
+---
 
-- Thanks to the LaTeX community for the great tools and resources.
-- Inspired by various LaTeX resume templates and GitHub Actions workflows.
+## Acknowledgements
 
-# 📫 Contact
+* The LaTeX community for powerful and elegant typesetting tools
+* GitHub Actions workflows and open-source LaTeX templates for automation inspiration
 
-Feel free to reach out via [GitHub Issues](https://github.com/aditya26062003/resume/issues) for any questions or feedback.
-              
+---
+
+## Contact
+
+For questions or suggestions, feel free to open an issue at [GitHub Issues](https://github.com/aditya26062003/resume/issues).
+
