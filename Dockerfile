@@ -67,16 +67,16 @@ RUN fmtutil-sys --all
 WORKDIR /app
 
 # Copy your LaTeX resume file and all associated image assets into the container.
-# Ensure that 'resume.tex' and all '.png' files (gmail.png, ldn.png, etc.)
-# are in the same directory as this Dockerfile when you build the image.
+# Ensure that 'resume.tex' is in the same directory as this Dockerfile,
+# and all '.png' files are in a 'data' subdirectory relative to the Dockerfile.
 COPY resume.tex .
-COPY gmail.png .
-COPY ldn.png .
-COPY github.png .
-COPY lc.png .
-COPY hf.png .
-COPY kaggle.png .
-COPY cf.png .
+COPY data/gmail.png .
+COPY data/ldn.png .
+COPY data/github.png .
+COPY data/lc.png .
+COPY data/hf.png .
+COPY data/kaggle.png .
+COPY data/cf.png .
 
 # Set the entrypoint for the container.
 # This command will be executed when the container starts.
