@@ -3,7 +3,8 @@ name: Update the Resume
 on:
   push:
     paths:
-      - 'data/resume.tex'  # Only trigger when this file is changed
+      - 'data/resume.tex'
+      - 'Dockerfile' 
 
 jobs:
   generate_cv_job:
