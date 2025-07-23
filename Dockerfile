@@ -69,7 +69,7 @@ WORKDIR /app
 # Copy your LaTeX resume file and all associated image assets into the container.
 # Ensure that 'resume.tex' is in the same directory as this Dockerfile,
 # and all '.png' files are in a 'data' subdirectory relative to the Dockerfile.
-COPY resume.tex .
+COPY data/resume.tex .
 COPY data/gmail.png .
 COPY data/ldn.png .
 COPY data/github.png .
