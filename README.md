@@ -2,7 +2,7 @@
 
 This repository contains a LaTeX-based resume with an automated PDF build process using GitHub Actions and Docker. It ensures consistent formatting, reproducible builds, and clean version control.
 
----
+
 
 ## Features
 
@@ -11,7 +11,7 @@ This repository contains a LaTeX-based resume with an automated PDF build proces
 * Dockerized for consistent, dependency-free builds
 * Organized project layout for easy maintenance and clarity
 
----
+
 
 ## Project Structure
 
@@ -34,7 +34,7 @@ resume/
 └── README.md
 ```
 
----
+
 
 ## Usage
 
@@ -56,7 +56,7 @@ docker run --rm -v $(pwd):/usr/src/app resume-builder
 
 This process compiles the resume inside an isolated environment and outputs the PDF to the `out/` directory.
 
----
+
 
 ### Using GitHub Actions
 
@@ -76,7 +76,7 @@ This process compiles the resume inside an isolated environment and outputs the 
    * Place the updated PDF in the `out/` directory
    * Commit and push the updated PDF if necessary
 
----
+
 
 ### Local Compilation (Without Docker)
 
@@ -87,20 +87,19 @@ This process compiles the resume inside an isolated environment and outputs the 
    pdflatex -output-directory=out data/resume.tex
    ```
 
----
+
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
----
+
 
 ## Acknowledgements
 
 * The LaTeX community for powerful and elegant typesetting tools
 * GitHub Actions workflows and open-source LaTeX templates for automation inspiration
 
----
 
 ## Contact
 
