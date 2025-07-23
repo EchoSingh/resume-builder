@@ -84,4 +84,4 @@ COPY data/cf.png .
 # -output-directory=out: Specifies that the output files (like the PDF) should be placed in an 'out' subdirectory.
 # resume.tex: The main LaTeX file to compile.
 # We first create the 'out' directory to avoid potential errors if it doesn't exist.
-ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -output-directory=out resume.tex"]
+ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -output-directory=out data/resume.tex"]
