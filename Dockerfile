@@ -1,10 +1,7 @@
-# Stage 1: Build TeX Live environment with necessary packages
 FROM debian:bookworm-slim AS texlive-builder
 
-# Prevent interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies for the TeX Live installer
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     wget \
@@ -13,9 +10,7 @@ RUN apt-get update && \
     make && \
     rm -rf /var/lib/apt/lists/*
 
-# Download, extract, and install a minimal TeX Live scheme
-# Using a specific, reliable CTAN mirror for consistent downloads.
-RUN wget http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/tlnet/install-tl-unx.tar.gz -O /tmp/install-tl-unx.tar.gz && \
+RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O /tmp/install-tl-unx.tar.gz && \
     tar -xzf /tmp/install-tl-unx.tar.gz -C /tmp && \
     cd /tmp/install-tl-* && \
     printf '%s\n' \
@@ -29,10 +24,10 @@ RUN wget http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/tlnet/install
     cd / && \
     rm -rf /tmp/install-tl-unx.tar.gz /tmp/install-tl-*
 
-# Update tlmgr and install only the specific LaTeX packages required for your resume
-# This is crucial for image size optimization. Verify these packages against your .tex file.
-RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self && \
-    /usr/local/texlive/bin/x86_64-linux/tlmgr install \
+ENV PATH="/usr/local/texlive/bin/x86_64-linux:${PATH}"
+
+RUN tlmgr update --self && \
+    tlmgr install \
     collection-basic \
     xelatex \
     fontawesome5 \
@@ -46,19 +41,14 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self && \
     enumitem \
     tabularx \
     multicol \
-    babel-english \
-    && /usr/local/texlive/bin/x86_64-linux/fmtutil-sys --all
-
-
-
-# Stage 2: Final runtime image for compilation
+    babel-english && \
+    fmtutil-sys --all && \
+    rm -rf /usr/local/texlive/install-tl.log /tmp/*
 
 FROM debian:bookworm-slim
 
-# Prevent interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install essential runtime dependencies for LaTeX compilation
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     fontconfig \
@@ -66,17 +56,12 @@ RUN apt-get update && \
     g++ && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy the minimal TeX Live installation from the builder stage
 COPY --from=texlive-builder /usr/local/texlive /usr/local/texlive
 
-# Add TeX Live binaries to the PATH
 ENV PATH="/usr/local/texlive/bin/x86_64-linux:${PATH}"
 
-# Set the working directory within the container
 WORKDIR /app
 
-# Copy resume source files into the container
 COPY data/ /app/data/
 
-# Define the command to execute when the container runs (compiles the resume)
 ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -output-directory=out data/resume.tex"]
