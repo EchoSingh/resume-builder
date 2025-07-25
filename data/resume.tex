@@ -1,222 +1,223 @@
-%-------------------------
-% Resume in LaTeX
-% Author : Aditya Singh
-% License : MIT
-%-------------------------
+%-----------------------------------------
+% Modern Professional Resume
+% Author: Aditya Singh 
+% License: MIT
+%-----------------------------------------
 
-\documentclass[letterpaper,11pt]{article}
+\documentclass[letterpaper,10pt]{article}
 
-%-------------------------
-% Package Inclusions
-\usepackage{graphicx}
-\usepackage{fontawesome5}
-\usepackage{svg}
-\usepackage{xcolor}
-\usepackage[hidelinks]{hyperref}
-\usepackage{latexsym}
+%================================================================================
+%                             PACKAGES
+%================================================================================
+
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
 \usepackage{marvosym}
-\usepackage[usenames,dvipsnames]{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage[english]{babel}
 \usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
 \usepackage{multicol}
-\usepackage{tikz}
-\usetikzlibrary{svg.path}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{geometry}
+\usepackage{xstring} % For string manipulation in contactItem
+\usepackage{scalerel} % For scalable bullets
 
-\setlength{\multicolsep}{-3.0pt}
-\setlength{\columnsep}{-1pt}
-\setlength{\tabcolsep}{0in}
-
-%-------------------------
-% Color Definitions
-\definecolor{cvblue}{HTML}{0E5484}
-\definecolor{black}{HTML}{130810}
-\definecolor{darkcolor}{HTML}{0F4539}
-\definecolor{cvgreen}{HTML}{3BD80D}
-\definecolor{taggreen}{HTML}{00E278}
-\definecolor{SlateGrey}{HTML}{2E2E2E}
-\definecolor{LightGrey}{HTML}{666666}
-\colorlet{name}{black}
-\colorlet{tagline}{darkcolor}
-\colorlet{heading}{darkcolor}
-\colorlet{headingrule}{cvblue}
-\colorlet{accent}{darkcolor}
-\colorlet{emphasis}{SlateGrey}
-\colorlet{body}{LightGrey}
-
-%-------------------------
-% Margin Adjustments
-\addtolength{\oddsidemargin}{-0.6in}
-\addtolength{\evensidemargin}{-0.5in}
-\addtolength{\textwidth}{1.19in}
-\addtolength{\topmargin}{-0.7in}
-\addtolength{\textheight}{1.4in}
-
-\urlstyle{same}
-\raggedbottom
-\raggedright
-
-%-------------------------
-% Section Formatting
-\titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large\bfseries
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
-
-% Ensure machine-readable/ATS parsable pdf
+% Ensure PDF is machine-readable/ATS parsable
 \pdfgentounicode=1
 
-%-------------------------
-% Custom Commands
-\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
-\newcommand{\classesList}[4]{\item\small{#1 #2 #3 #4 \vspace{-2pt}}}
-\newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{\large #1} & \textbf{\small #2} \\
-      \textit{\large #3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
-}
-\newcommand{\resumeSubSubheading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{\small #1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
-}
-\newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
-      \small #1 & \textbf{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
-}
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+%================================================================================
+%                             STYLING
+%================================================================================
 
-\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+% COLORS (Black and White)
+\definecolor{primary}{HTML}{000000}    % Black
+\definecolor{secondary}{HTML}{333333}  % Very Dark Gray
+\definecolor{accent}{HTML}{666666}     % Dark Gray
+\definecolor{lightgray}{HTML}{999999}  % Medium Gray
+\definecolor{sectionline}{HTML}{CCCCCC}% Light Gray
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+% LAYOUT
+\geometry{
+  paper=letterpaper,
+  left=0.75in,
+  right=0.75in,
+  top=0.6in,
+  bottom=0.6in,
+  columnsep=0.25in
+}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\tabcolsep}{0in}
+\setlength{\headheight}{12pt}
+
+% FONTS
+\urlstyle{same}
+
+% SECTION FORMATTING
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries\color{primary}
+}{}{0em}{}[\color{sectionline}\titlerule\vspace{-5pt}]
+
+% LIST FORMATTING
+\setlist[itemize]{leftmargin=*, label=$\bullet$, itemsep=2pt, topsep=2pt}
+\setlist[itemize,1]{label=\color{primary}\large\textbullet}
+
+%================================================================================
+%                         CUSTOM COMMANDS
+%================================================================================
+
+% Subheading list
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in,label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
-\newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
+% Main content entries
+\newcommand{\resumeSubheading}[4]{%
+  \item
+  \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & {\small\bfseries #2} \\
+    \textit{\color{primary} #3} & {\textit{\color{primary} #4}} \\
+  \end{tabular*}\vspace{-2pt}
+}
 
-%-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\resumeProjectHeading}[2]{%
+  \item
+  \begin{tabular*}{1.0\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+    #1 & \href{#2}{\color{accent}\faExternalLinkSquare*} \\
+  \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+\newcommand{\resumeItem}[1]{\item\small{#1}}
+
+% Scalable bullet for certifications
+\newcommand{\sbullet}[1]{\mathbin{\scalerel*{\textbullet}{#1}}}
+
+% Contact item (unused)
+\newcommand{\contactItem}[2]{%
+  \item \small\textbf{#1:} \href{#2}{\underline{\color{accent}\StrBehind{#2}{://}}}
+}
+
+%================================================================================
+%                           DOCUMENT START
+%================================================================================
+
 \begin{document}
 
-\begin{center} 
-    {\Huge \scshape ADITYA SINGH} \\[8pt] 
-    \large Bangalore, Karnataka, India \\[12pt] 
-    \small 
-    \resizebox{\textwidth}{!}{%
-        \href{tel:+919752962206}{\raisebox{-0.1\height}{\faPhone}\ \underline{+91-9752962206}} \quad
-        \href{mailto:adityarathore2606@gmail.com}{\raisebox{-0.1\height}{\includegraphics[height=1em]{gmail.png}}\ \underline{adityarathore2606@gmail.com}} \quad
-        \href{https://linkedin.com/in/adityasinghgdev}{\raisebox{-0.1\height}{\includegraphics[height=1em]{ldn.png}}\ \underline{adityasinghgdev}} \quad
-        \href{https://github.com/EchoSingh}{\raisebox{-0.1\height}{\includegraphics[height=1em]{github.png}}\ \underline{EchoSingh}} \quad
-        \href{https://www.leetcode.com/adi_s_r}{\raisebox{-0.1\height}{\includegraphics[height=1em]{lc.png}}\ \underline{adi\_s\_r}} \quad
-        \href{https://huggingface.co/adi2606}{\raisebox{-0.1\height}{\includegraphics[height=1em]{hf.png}}\ \underline{adi2606}} \quad
-        \href{https://www.kaggle.com/adi2606}{\raisebox{-0.1\height}{\includegraphics[height=1em]{kaggle.png}}\ \underline{Kaggle}} \quad
-        \href{https://codeforces.com/profile/Zhu_Yun}{\raisebox{-0.1\height}{\includegraphics[height=1em]{cf.png}}\ \underline{Zhu\_Yun}} \quad
-        \href{https://adi-pf.vercel.app/}{\raisebox{-0.1\height}{\faUser}\ \underline{Portfolio}}}
+\begin{center}
+    {\Huge \scshape ADITYA SINGH} \\[6pt]
+    \large Bangalore, Karnataka, India \\[8pt]
 \end{center}
 
-%-----------EDUCATION-----------
+%-----------CONTACT-----------
+\section{CONTACT}
+\begin{center}
+\small
+\href{tel:+919752962206}{\raisebox{-0.1\height}{\faPhone}\ +91-9752962206} $|$ 
+\href{mailto:adityarathore2606@gmail.com}{\raisebox{-0.1\height}{\faEnvelope}\ adityarathore2606@gmail.com} $|$
+\href{https://linkedin.com/in/adityasinghgdev}{\raisebox{-0.1\height}{\faLinkedin}\ adityasinghgdev} $|$
+\href{https://github.com/EchoSingh}{\raisebox{-0.1\height}{\faGithub}\ EchoSingh} $|$
+\href{https://www.leetcode.com/rayo_n}{\raisebox{-0.1\height}{\includegraphics[height=1em]{lc2.png}}\ rayo\_n} $|$
+\href{https://github.com/EchoSingh}{\raisebox{-0.1\height}{\faHackerrank}\ rayo\_n} $|$
+\href{https://github.com/EchoSingh}{\raisebox{-0.1\height}{\faKaggle}\ adi2606}
+\end{center}
+
+%-----------EDUCATION---------------------------
 \section{EDUCATION}
+\vspace{5 pt}
   \resumeSubHeadingListStart
     \resumeSubheading
       {Dayananda Sagar College of Engineering}{May 2022 -- May 2026}
-      {B.E. (ISE) --- \textbf{CGPA: 9.3}}{Bangalore, Karnataka}
+      {Bachelor of Engineering in Information Science and Engineering --- \textbf{CGPA: 9.29}}{Bangalore, Karnataka}
   \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
 \section{EXPERIENCE}
+\vspace{5 pt}
   \resumeSubHeadingListStart
     \resumeSubheading
       {Nokia}{April 2025 -- Present}
       {Machine Learning Intern}{Bangalore, Karnataka}
       \resumeItemListStart
-        \resumeItem{Developed Industrial OT Text Dataset for LLM Fine-tuning from industrial documents, product guides, service manuals, and standards.Covered a diverse range of topics in networks, manufacturing, logistics, mining, and related verticals.}
+        \resumeItem{Developed and curated Industrial OT Text Dataset for Large Language Model (LLM) fine-tuning, extracting data from industrial documents, product guides, service manuals, and standards.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
 %-----------PROJECTS-----------
 \section{PROJECTS}
-    \vspace{-5pt}
-    \resumeSubHeadingListStart
+\vspace{5 pt}
+\resumeSubHeadingListStart
 
-        \resumeProjectHeading
-          {\href{https://www.kaggle.com/code/adi2606/deepfake-image-detection}{\textbf{\large{\underline{Deepfake Image Detection}}} \faExternalLink}}{}
-        \vspace{-10pt}
-        \resumeItemListStart
-            \resumeItem{Developed a CNN-based model to detect deepfake images using the deepfake-faces dataset from Kaggle.}
-            \resumeItem{Achieved 83.62\% accuracy with 0.7588 loss on test set, processing 100 samples in 14s (141ms/step).}
-            \resumeItem{Optimized model training using GPU acceleration (T4 x2) with a runtime of 30m 5s.}
-            \resumeItem{\textbf{Tech Stack:} Python, TensorFlow, OpenCV, NumPy, Pandas, GPU Acceleration.}
-        \resumeItemListEnd
-        \vspace{-13pt}
+  \item
+  \begin{tabular*}{1.0\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+    \textbf{\large{\underline{Face Aging Using Conditional GAN}}} & \textit{Feb 2025 -- Apr 2025} \\
+    \multicolumn{2}{@{}l}{\href{https://www.kaggle.com/code/adi2606/face-aging-using-conditional-gan}{\texttt{kaggle.com/adi2606/code}}} \\
+  \end{tabular*}
+  \resumeItemListStart
+      \resumeItem{Built a GAN-based pipeline to generate aged versions of children's faces using Conditional GAN architecture.}
+      \resumeItem{Trained for 50 epochs with final generator loss of 5.9297 and discriminator loss of 0.0082, achieving stable convergence.}
+      \resumeItem{Received a \textbf{Bronze Medal on Kaggle} with \textbf{21+ upvotes}.}
+      \resumeItem{\textbf{Tech Stack:} Python, GANs, Kaggle.}
+  \resumeItemListEnd
+  \vspace{5pt}
 
-        \resumeProjectHeading
-          {\href{https://www.kaggle.com/code/adi2606/face-aging-using-conditional-gan}{\textbf{\large{\underline{Face Aging Using Conditional GAN}}} \faExternalLink}}{}
-        \vspace{-10pt}
-        \resumeItemListStart
-            \resumeItem{Built a GAN-based pipeline to generate aged versions of children's faces using Conditional GAN architecture.}
-            \resumeItem{Trained for 50 epochs with final generator loss of 5.9297 and discriminator loss of 0.0082, achieving stable convergence.}
-            \resumeItem{Received a \textbf{Bronze Medal on Kaggle} with \textbf{12+ upvotes}.}
-            \resumeItem{\textbf{Tech Stack:} Python, TensorFlow, OpenCV, Matplotlib, GANs, Kaggle.}
-        \resumeItemListEnd
-        \vspace{-8pt}
-    \resumeSubHeadingListEnd
+  \item
+  \begin{tabular*}{1.0\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+    \textbf{\large{\underline{CarGoPlus - Car Rental Management System}}} & \textit{Sep 2024 -- Dec 2024} \\
+    \multicolumn{2}{@{}l}{\href{https://github.com/EchoSingh/CarGoPlus}{\texttt{github.com/EchoSingh/CarGoPlus}}} \\
+  \end{tabular*}
+  \resumeItemListStart
+      \resumeItem{Developed a car rental management system with a GUI using C++ and \textbf{wxWidgets}, integrated with a \textbf{MySQL backend}.}
+      \resumeItem{Gained hands-on experience with \textbf{wxWidgets} for creating native desktop interfaces and managing event-driven programming.}
+      \resumeItem{\textbf{Technologies:} C++, wxWidgets, MySQL, Visual Studio.}
+  \resumeItemListEnd
+  \vspace{5pt}
 
-%-----------ACHIEVEMENTS---------------
-\section{ACHIEVEMENTS}
+\resumeSubHeadingListEnd
+
+
+
+%-----------ACHIEVEMENTS-----------
+\section{Achievements}
 \resumeSubHeadingListStart
 
   \resumeSubheading
-    {Kaggle Notebook Expert}{Ongoing}
-    {Global Rank: \textbf{3,398} of 57,792 | Highest Rank: \textbf{3,321}}{}
+    {Sandbox 2025 Cybersecurity Hackathon}{March 1–2, 2025}
+    {Top 10 Finalist}{}
     \resumeItemListStart
-      \resumeItem{Achieved \textbf{5 Medals} for high-quality technical content and analysis.}
+      \resumeItem{Recognized for developing innovative cybersecurity solutions. \href{https://github.com/EchoSingh/ML-DeepFake-Detection-Defense--BAM-}{(GitHub Repository)}}
     \resumeItemListEnd
 
   \resumeSubheading
-    {Sandbox 2025 Cybersecurity Hackathon}{March 2025}
-    {Top 10 Finalist — Dayananda Sagar College of Engineering (CSE - Cyber Security)}{}
+    {Kaggle Expert}{Ongoing}
+    {Notebook Expert Rank: \textbf{1,318} of 51,736 (Top 2.5\%) \quad | \quad Dataset Expert Rank: \textbf{679} of 9,268 (Top 7.3\%)}{}
     \resumeItemListStart
-      \resumeItem{Secured a position in the \textbf{Top 10} among 100+ participants. \href{https://github.com/EchoSingh/resume/blob/main/data/sandbox.pdf}{(Certificate Link)}}
+      \resumeItem{Earned \textbf{7 medals} for high-quality contributions to notebooks and datasets.}
     \resumeItemListEnd
 
   \resumeSubheading
     {LeetCode}{Ongoing}
-    {Max Rating: \textbf{1759} | Global Rank: \textbf{62,252}}{}
-    \resumeItemListStart
-      \resumeItem{Secured \textbf{Global Rank 511} in Weekly Contest 442.}
-    \resumeItemListEnd
+    {Contest Rating: \textbf{1,531} (Top 35.76\% Globally)}{}
 
 \resumeSubHeadingListEnd
 
-%-----------TECHNICAL SKILLS-----------
-\section{TECHNICAL SKILLS}
-\begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-      \textbf{\normalsize{Programming Languages:}} \normalsize{Python, C++, Java, SQL, HTML/CSS} \\
-      \vspace{+2pt}
-      \textbf{\normalsize{Machine Learning \& AI:}} \normalsize{Deep Learning, Neural Networks, GANs, CNN, NLP, Computer Vision, Data Analysis, RAG Architecture} \\
-      \vspace{+2pt}
-      \textbf{\normalsize{ML Frameworks \& Libraries:}} \normalsize{TensorFlow, PyTorch, scikit-learn, OpenCV, NumPy, Pandas, Matplotlib, Hugging Face Transformers} \\
-      \vspace{+2pt}
-      \textbf{\normalsize{Developer Tools:}} \normalsize{GitHub, Kaggle, Hugging Face, Gradio, VS Code, Jupyter Notebook, Docker} \\
-      \vspace{+2pt}
-      \textbf{\normalsize{Cloud \& Deployment:}} \normalsize{Hugging Face Spaces, Kaggle , GPU Acceleration} \\
-      \vspace{+2pt}
-      \textbf{\normalsize{Soft Skills:}} \normalsize{Problem Solving, Technical Documentation, Open Source Contribution, Team Collaboration}
-    }}
-\end{itemize}
-\vspace{-15pt}
 
-%-----------CERTIFICATIONS---------------
-\section{CERTIFICATIONS}
-$\sbullet[.75] \hspace{0.2cm}$ \href{https://drive.google.com/file/d/1EAdp5dIQZKCcfYnakiDKGdt8MWC8gYyF/view?usp=sharing}{Data Mining (NPTEL Online Certification) - IIT Kharagpur | Score: 57\% | Jan-Mar 2025}
+%-----------SKILLS---------------
+
+\section*{Technical Skills}
+\vspace{5pt}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \item \textbf{Languages:} C++, Java, Python, SQL 
+    \item\textbf{Frameworks/Libraries:} wxWidgets, Android SDK, Hugging Face Transformers
+    \item \textbf{ML \& Data:} Large Language Models (LLMs), Dataset Curation, Docling, CleanText
+    \item \textbf{Tools:} Visual Studio Code, Eclipse, JetBrains Fleet, Kaggle, Google Colab
+\end{itemize}
 
 \end{document}
