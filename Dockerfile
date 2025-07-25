@@ -23,7 +23,6 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O /
     tar -xzf /tmp/install-tl-unx.tar.gz -C /tmp && \
     cd /tmp/install-tl-* && \
     # Create a profile for a non-interactive installation.
-    # Using scheme-basic provides a stable base for adding more packages.
     printf '%s\n' \
         "selected_scheme scheme-basic" \
         "TEXDIR /usr/local/texlive" \
@@ -31,8 +30,9 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O /
         "TEXMFSYSVAR /usr/local/texlive/texmf-var" \
         "TEXMFSYSCONFIG /usr/local/texlive/texmf-config" \
         "binary_x86_64-linux 1" > texlive.profile && \
-    # Run the installer with the profile
-    ./install-tl --profile=texlive.profile && \
+    # Run the installer with the profile, forcing it to use a reliable repository
+    # to prevent intermittent network errors from specific mirrors.
+    ./install-tl --profile=texlive.profile --repository http://mirror.ctan.org/systems/texlive/tlnet/ && \
     # Clean up installer files
     cd / && \
     rm -rf /tmp/install-tl-unx.tar.gz /tmp/install-tl-*
