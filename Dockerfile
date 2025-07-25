@@ -7,7 +7,8 @@ RUN apt-get update && \
     wget \
     xzdec \
     perl \
-    make && \
+    make \
+    ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O /tmp/install-tl-unx.tar.gz && \
