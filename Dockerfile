@@ -48,8 +48,6 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self && \
     babel-english \
     && /usr/local/texlive/bin/x86_64-linux/fmtutil-sys --all
 
----
-
 # Stage 2: Final runtime image for compilation
 
 FROM debian:bookworm-slim
