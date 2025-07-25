@@ -1,4 +1,6 @@
-FROM danteev/texlive:small
+
+FROM ghcr.io/xu-cheng/texlive-small:latest
+
 
 RUN apt-get update && apt-get install -y \
     inkscape \
@@ -7,7 +9,9 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
+
 COPY data/resume.tex .
 COPY data/*.png .
 
+# Compile using xelatex
 ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -interaction=nonstopmode -output-directory=out data/resume.tex"]
