@@ -56,11 +56,8 @@ RUN tlmgr update --self && \
     tabularx \
     multicol \
     babel-english \
-    scalerel && \
-    # Explicitly rebuild the file database and format files to prevent errors.
     texhash && \
     fmtutil-sys --all && \
-    # Clean up logs and temporary files to reduce image size.
     rm -rf /usr/local/texlive/install-tl.log /tmp/* /usr/local/texlive/texmf-var/web2c/tlmgr.log
 
 # Stage 2: Create the final, smaller runtime image
