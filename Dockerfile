@@ -40,22 +40,23 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O /
 # Add TeX Live binaries to the PATH
 ENV PATH="/usr/local/texlive/bin/x86_64-linux:${PATH}"
 
-# Update the TeX Live package manager and install required packages
+# Update the TeX Live package manager and install required packages individually
+# This helps in identifying problematic packages more easily.
 RUN tlmgr update --self && \
-    tlmgr install \
-    latexmk \
-    xelatex \
-    fontawesome5 \
-    tikz \
-    hyperref \
-    latexsym \
-    fullpage \
-    titlesec \
-    marvosym \
-    enumitem \
-    tabularx \
-    multicol \
-    babel-english \
+    tlmgr install latexmk && \
+    tlmgr install xelatex && \
+    tlmgr install fontawesome5 && \
+    tlmgr install tikz && \
+    tlmgr install hyperref && \
+    tlmgr install latexsym && \
+    tlmgr install fullpage && \
+    tlmgr install titlesec && \
+    tlmgr install marvosym && \
+    tlmgr install enumitem && \
+    tlmgr install tabularx && \
+    tlmgr install multicol && \
+    tlmgr install babel-english && \
+    tlmgr install scalerel && \
     texhash && \
     fmtutil-sys --all && \
     rm -rf /usr/local/texlive/install-tl.log /tmp/* /usr/local/texlive/texmf-var/web2c/tlmgr.log
