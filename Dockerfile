@@ -56,9 +56,12 @@ RUN tlmgr update --self && \
     enumitem \
     tabularx \
     multicol \
-    babel-english && \
-    # Explicitly rebuild the file database. While tlmgr does this, being explicit can prevent issues.
+    babel-english \
+    xstring \
+    scalerel && \
+    # Explicitly rebuild the file database and format files to prevent errors.
     texhash && \
+    fmtutil-sys --all && \
     # Clean up logs and temporary files to reduce image size.
     rm -rf /usr/local/texlive/install-tl.log /tmp/* /usr/local/texlive/texmf-var/web2c/tlmgr.log
 
