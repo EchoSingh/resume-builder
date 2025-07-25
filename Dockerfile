@@ -46,7 +46,6 @@ RUN tlmgr update --self && \
     latexmk \
     xelatex \
     fontawesome5 \
-    xcolor \
     tikz \
     hyperref \
     latexsym \
@@ -57,7 +56,6 @@ RUN tlmgr update --self && \
     tabularx \
     multicol \
     babel-english \
-    xstring \
     scalerel && \
     # Explicitly rebuild the file database and format files to prevent errors.
     texhash && \
