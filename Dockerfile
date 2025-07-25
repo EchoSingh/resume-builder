@@ -14,8 +14,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Download, extract, and install a minimal TeX Live scheme
-# This installs the base TeX Live structure and tlmgr.
-RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O /tmp/install-tl-unx.tar.gz && \
+# Using a specific, reliable CTAN mirror for consistent downloads.
+RUN wget http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/tlnet/install-tl-unx.tar.gz -O /tmp/install-tl-unx.tar.gz && \
     tar -xzf /tmp/install-tl-unx.tar.gz -C /tmp && \
     cd /tmp/install-tl-* && \
     printf '%s\n' \
@@ -29,7 +29,8 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O /
     cd / && \
     rm -rf /tmp/install-tl-unx.tar.gz /tmp/install-tl-*
 
-# Updated tlmgr and install only the specific LaTeX packages required for my resume
+# Update tlmgr and install only the specific LaTeX packages required for your resume
+# This is crucial for image size optimization. Verify these packages against your .tex file.
 RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self && \
     /usr/local/texlive/bin/x86_64-linux/tlmgr install \
     collection-basic \
@@ -47,6 +48,8 @@ RUN /usr/local/texlive/bin/x86_64-linux/tlmgr update --self && \
     multicol \
     babel-english \
     && /usr/local/texlive/bin/x86_64-linux/fmtutil-sys --all
+
+
 
 # Stage 2: Final runtime image for compilation
 
@@ -75,5 +78,5 @@ WORKDIR /app
 # Copy resume source files into the container
 COPY data/ /app/data/
 
-# compile the resume
+# Define the command to execute when the container runs (compiles the resume)
 ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -output-directory=out data/resume.tex"]
