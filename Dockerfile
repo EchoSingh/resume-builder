@@ -44,7 +44,7 @@ ENV PATH="/usr/local/texlive/bin/x86_64-linux:${PATH}"
 # This helps in identifying problematic packages more easily.
 RUN tlmgr update --self && \
     tlmgr install latexmk && \
-    tlmgr install xelatex && \
+    tlmgr install collection-xetex && \  
     tlmgr install fontawesome5 && \
     tlmgr install tikz && \
     tlmgr install hyperref && \
