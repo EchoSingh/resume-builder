@@ -1,4 +1,4 @@
-# Resume 📄
+# Resume Builder📄
 
 This repository contains a LaTeX-based resume with an automated PDF build process using GitHub Actions and Docker. It ensures consistent formatting, reproducible builds, and clean version control.
 
