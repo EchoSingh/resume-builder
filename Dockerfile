@@ -56,7 +56,7 @@ COPY data/resume.tex .
 COPY data/gmail.png .
 COPY data/ldn.png .
 COPY data/github.png .
-COPY data/lc.png .
+COPY data/lc2.png .
 COPY data/hf.png .
 COPY data/kaggle.png .
 COPY data/cf.png .
