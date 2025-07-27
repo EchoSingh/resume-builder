@@ -52,14 +52,9 @@ WORKDIR /app
 # Copy your LaTeX resume file and all associated image assets into the container.
 # Ensure that 'resume.tex' is in the same directory as this Dockerfile,
 # and all '.png' files are in a 'data' subdirectory relative to the Dockerfile.
-COPY data/resume.tex .
-COPY data/gmail.png .
-COPY data/ldn.png .
-COPY data/github.png .
-COPY data/lc2.png .
-COPY data/hf.png .
-COPY data/kaggle.png .
-COPY data/cf.png .
+COPY /data/resume.tex .
+COPY /data/lc2.png .
+
 
 # Set the entrypoint for the container.
 ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -output-directory=out data/resume.tex"]
