@@ -34,11 +34,7 @@ jobs:
           fi
 
       - name: Compile Resume PDF
-        run: |
-          cd data
-          pdflatex resume.tex
-          # Optionally run twice for references if needed:
-          # pdflatex resume.tex
+        uses: ./
 
       - name: Commit Changes
         id: commit
