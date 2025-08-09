@@ -2,9 +2,10 @@
 FROM texlive/texlive:latest
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /github/workspace
 
 # Copy the resume source file into the container
+# This is relative to the workspace root
 COPY data/resume.tex .
 
 # Compile the resume using xelatex
