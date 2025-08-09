@@ -5,7 +5,7 @@ on:
     paths:
       - 'data/resume.tex'
       - 'Dockerfile'
-  workflow_dispatch:  
+  workflow_dispatch:
 
 jobs:
   generate_cv:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  
+          fetch-depth: 0
 
       - name: Merge latest main
         run: |
@@ -24,8 +24,21 @@ jobs:
           git checkout main
           git pull origin main
 
-      - name: Run CV Generation Action
-        uses: ./
+      - name: Remove old resume PDF
+        run: |
+          if [ -f data/resume.pdf ]; then
+            rm data/resume.pdf
+            echo "Old resume.pdf removed."
+          else
+            echo "No previous resume.pdf to remove."
+          fi
+
+      - name: Compile Resume PDF
+        run: |
+          cd data
+          pdflatex resume.tex
+          # Optionally run twice for references if needed:
+          # pdflatex resume.tex
 
       - name: Commit Changes
         id: commit
@@ -33,7 +46,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
-          git add --all
+          git add data/resume.pdf
           
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
