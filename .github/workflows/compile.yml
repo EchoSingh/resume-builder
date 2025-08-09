@@ -1,50 +1,35 @@
-name: Update the Resume
+name: Build and Commit Resume PDF
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'data/resume.tex'
       - 'Dockerfile'
+      - '.github/workflows/compile.yml'
   workflow_dispatch:
 
 jobs:
-  generate_cv:
-    name: Generate Resume PDF
+  build_and_commit_pdf:
+    name: Build and Commit Resume PDF
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Merge latest main
-        run: |
-          git fetch origin main
-          git checkout main
-          git pull origin main
 
       - name: Compile Resume PDF
         uses: ./
 
-      - name: Commit Changes
-        id: commit
-        shell: bash
+      - name: Commit and Push PDF
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "github-actions"
-          git add data/resume.pdf
-          
-          if [ -z "$(git status --porcelain)" ]; then
+          git config --local user.name "GitHub Actions"
+          git add out/resume.pdf
+          if git diff --staged --quiet; then
             echo "No changes to commit."
-            echo "push=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Updated Resume via GitHub Actions"
-            echo "push=true" >> "$GITHUB_OUTPUT"
+            git commit -m "Automated build of resume.pdf"
+            git push
           fi
-
-      - name: Push Changes
-        if: steps.commit.outputs.push == 'true'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
