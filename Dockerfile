@@ -1,13 +1,9 @@
 # Use a pre-built TeX Live image to speed up the build process
 FROM texlive/texlive:latest
 
-# Set the working directory
+# Set the working directory to match the GitHub Actions runner
 WORKDIR /github/workspace
 
-# Copy the resume source file into the container
-# This is relative to the workspace root
-COPY data/resume.tex .
-
-# Compile the resume using xelatex
-# The output will be placed in the 'out' directory
-ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -output-directory=out resume.tex"]
+# No need to COPY the file, as the entire workspace is mounted by the action
+# The ENTRYPOINT will compile the resume from the mounted volume
+ENTRYPOINT ["sh", "-c", "mkdir -p out && xelatex -output-directory=out data/resume.tex"]
