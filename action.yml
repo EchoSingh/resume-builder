@@ -1,8 +1,0 @@
-name: 'Build LaTeX resume PDF'
-description: 'Commit to master to trigger auto build, pdf in out folder'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-branding:
-  icon: 'book'
-  color: 'blue'

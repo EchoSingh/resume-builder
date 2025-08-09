@@ -1,107 +1,83 @@
-# Resume Builder📄
+# LaTeX Resume Builder 📄
 
-This repository contains a LaTeX-based resume with an automated PDF build process using GitHub Actions and Docker. It ensures consistent formatting, reproducible builds, and clean version control.
+[![Build Resume](https://github.com/EchoSingh/resume-builder/actions/workflows/compile.yml/badge.svg)](https://github.com/EchoSingh/resume-builder/actions/workflows/compile.yml) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-View%20Resume-brightgreen)](https://echosingh.github.io/resume-builder/resume.pdf)
 
+![License](https://img.shields.io/github/license/EchoSingh/resume-builder?style=for-the-badge&color=blue)
+![Last Commit](https://img.shields.io/github/last-commit/EchoSingh/resume-builder?style=for-the-badge&color=orange)
+![Repo Size](https://img.shields.io/github/repo-size/EchoSingh/resume-builder?style=for-the-badge&color=green)
+![Contributors](https://img.shields.io/github/contributors/EchoSingh/resume-builder?style=for-the-badge&color=purple)
+![Stars](https://img.shields.io/github/stars/EchoSingh/resume-builder?style=for-the-badge&color=yellow)
+![Forks](https://img.shields.io/github/forks/EchoSingh/resume-builder?style=for-the-badge&color=red)
 
+A robust, automated solution for creating and maintaining a professional resume using LaTeX, Docker, and GitHub Actions. This project provides a streamlined workflow for generating a high-quality PDF from a `.tex` source, ensuring consistency and simplifying version control.
 
-## Features
+## Workflow
 
-* Written in LaTeX for high-quality typesetting
-* Automatically compiled via GitHub Actions
-* Dockerized for consistent, dependency-free builds
-* Organized project layout for easy maintenance and clarity
-
+The following sequence-diagram illustrates the automated build process:
+![Workflow Diagram](data/sequenceDiagram.svg)
 
 
 ## Project Structure
 
+The repository is organized as follows:
+
 ```
-resume/
+resume-builder/
 ├── .github/
 │   └── workflows/
-│       └── compile.yml
+│       └── compile.yml   # GitHub Actions workflow for automated builds
 ├── data/
-│   └── resume.tex
-├── assets/
-│   └── image.png
-├── out/
-│   └── resume.aux
-│   └── resume.log
-│   └── resume.out
-│   └── resume.pdf
-├── Dockerfile
-├── action.yml
-└── README.md
+│   └── resume.tex        # The main LaTeX source file for the resume
+├── docs/
+│   └── resume.pdf        # The generated PDF output
+├── Dockerfile            # Defines the containerized build environment
+├── action.yml            # Defines the custom GitHub Action
+└── README.md             # This file
 ```
-
-
 
 ## Usage
 
-### Using Docker
+### Automated Workflow (Recommended)
 
-Update the `Dockerfile` to reference the correct input files:
+1.  **Edit `data/resume.tex`** with your information.
+2.  **Commit and push** your changes to the `main` branch.
+3.  GitHub Actions will automatically:
+    -   Compile the LaTeX source file.
+    -   Commit the updated `resume.pdf` to the `docs/` directory.
 
-```dockerfile
-COPY data/resume.tex .
-COPY data/icon-image.png .
-```
+### Local Compilation
 
-Then build and run the container:
+#### Prerequisites
+
+-   [Docker](https://www.docker.com/get-started) for the containerized build.
+-   A local [LaTeX distribution](https://www.latex-project.org/get/) (e.g., TeX Live, MiKTeX) for manual compilation.
+
+#### Using Docker
+
+This method uses the containerized environment for a consistent build.
 
 ```sh
+# Build the Docker image
 docker build -t resume-builder .
-docker run --rm -v $(pwd):/usr/src/app resume-builder
+
+# Run the container, mounting the current directory
+# The generated PDF will be in the `docs/` folder
+docker run --rm -v "$(pwd):/github/workspace" resume-builder
 ```
 
-This process compiles the resume inside an isolated environment and outputs the PDF to the `out/` directory.
+#### Manual Compilation
 
+If you have a local LaTeX installation, you can compile the resume directly.
 
+```sh
+# Compile the .tex file and place the output in the docs/ directory
+pdflatex -output-directory=docs data/resume.tex
+```
 
-### Using GitHub Actions
+## Contributing
 
-1. Edit `data/resume.tex`
-
-2. Commit and push your changes:
-
-   ```sh
-   git add data/resume.tex
-   git commit -m "Update resume"
-   git push origin main
-   ```
-
-3. GitHub Actions will:
-
-   * Compile the LaTeX source
-   * Place the updated PDF in the `out/` directory
-   * Commit and push the updated PDF if necessary
-
-
-
-### Local Compilation (Without Docker)
-
-1. Ensure you have a LaTeX distribution installed (e.g., TeX Live, MiKTeX)
-2. Compile manually:
-
-   ```sh
-   pdflatex -output-directory=out data/resume.tex
-   ```
-
-
+Contributions are welcome! If you have suggestions for improvements, please open an issue or submit a pull request.
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-
-
-## Acknowledgements
-
-* The LaTeX community for powerful and elegant typesetting tools
-* GitHub Actions workflows and open-source LaTeX templates for automation inspiration
-
-
-## Contact
-
-For questions or suggestions, feel free to open an issue at [GitHub Issues](https://github.com/aditya26062003/resume/issues).
-
