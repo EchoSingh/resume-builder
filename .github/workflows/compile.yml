@@ -24,15 +24,6 @@ jobs:
           git checkout main
           git pull origin main
 
-      - name: Remove old resume PDF
-        run: |
-          if [ -f data/resume.pdf ]; then
-            rm data/resume.pdf
-            echo "Old resume.pdf removed."
-          else
-            echo "No previous resume.pdf to remove."
-          fi
-
       - name: Compile Resume PDF
         uses: ./
 
