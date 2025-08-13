@@ -1,6 +1,6 @@
 %-----------------------------------------
 % Modern Professional Resume
-% Author: Aditya Singh
+% Author: Aditya Singh 
 % License: MIT
 %-----------------------------------------
 
@@ -24,10 +24,11 @@
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
 \usepackage{geometry}
-\usepackage{xstring}
-\usepackage{scalerel}
+\usepackage{xstring} % For string manipulation in contactItem
+\usepackage{scalerel} % For scalable bullets
 
-
+% Ensure PDF is machine-readable/ATS parsable
+%\pdfgentounicode=1
 
 %================================================================================
 %                             STYLING
@@ -119,15 +120,13 @@
 \section{CONTACT}
 \begin{center}
 \small
-
 \href{mailto:adityarathore2606@gmail.com}{\raisebox{-0.1\height}{\faEnvelope}\ adityarathore2606@gmail.com} $|$
 \href{https://linkedin.com/in/adityasinghgdev}{\raisebox{-0.1\height}{\faLinkedin}\ adityasinghgdev} $|$
 \href{https://github.com/EchoSingh}{\raisebox{-0.1\height}{\faGithub}\ EchoSingh} $|$
-\href{https://leetcode.com/rayo_n}{\raisebox{-0.1\height}{\faCode}\ rayo\_n} $|$
-\href{https://www.hackerrank.com/rayo_n}{\raisebox{-0.1\height}{\faHackerrank}\ rayo\_n} $|$
-\href{https://www.kaggle.com/adi2606}{\raisebox{-0.1\height}{\faKaggle}\ adi2606}
+\href{https://www.leetcode.com/rayo_n}{\raisebox{-0.1\height}{\includegraphics[height=1em]{lc2.png}}\ rayo\_n} $|$
+\href{https://www.hackerrank.com/profile/rayo_n}{\raisebox{-0.1\height}{\includegraphics[height=1em]{hr.png}}\ rayo\_n} $|$
+\href{https://www.kaggle.com/adi2606}{\raisebox{-0.1\height}{\includegraphics[height=1em]{k3.png}}\ adi2606} 
 \end{center}
-
 
 %-----------EDUCATION---------------------------
 \section{EDUCATION}
@@ -135,8 +134,15 @@
   \resumeSubHeadingListStart
     \resumeSubheading
       {Dayananda Sagar College of Engineering}{May 2022 -- May 2026}
-      {Bachelor of Engineering in Information Science and Engineering --- \textbf{CGPA: 9.29}}{Bangalore, Karnataka}
+      {Bachelor of Engineering in Information Science and Engineering --- \textbf{CGPA: 9.30}}{Bangalore, Karnataka}
+    \resumeSubheading
+      {Army Public School, Bhopal}{Mar 2020 -- Jul 2021}
+      {Higher Secondary Certificate (PCM) --- \textbf{Percentage: 96.4\%}}{Bhopal, Madhya Pradesh}
+    \resumeSubheading
+      {Army Public School, Bhopal}{Feb 2018 -- Mar 2019}
+      {Secondary School Certificate (CBSE) --- \textbf{Percentage: 90.6\%}}{Bhopal, Madhya Pradesh}
   \resumeSubHeadingListEnd
+
 
 %-----------EXPERIENCE-----------
 \section{EXPERIENCE}
@@ -144,12 +150,13 @@
   \resumeSubHeadingListStart
     \resumeSubheading
       {Nokia}{April 2025 -- Present}
-      {Project Machine Learning Intern}{Bangalore, Karnataka}
+      {Machine Learning Intern}{Bangalore, Karnataka}
       \resumeItemListStart
         \resumeItem{Developed and curated Industrial OT Text Dataset for Large Language Model (LLM) fine-tuning, extracting data from industrial documents, product guides, service manuals, and standards.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
+%-----------PROJECTS-----------
 %-----------PROJECTS-----------
 \section{PROJECTS}
 \vspace{5 pt}
@@ -157,32 +164,29 @@
 
   \item
   \begin{tabular*}{1.0\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
-    \textbf{\large{\underline{Face Aging Using Conditional GAN}}} & \textit{Feb 2025 -- Apr 2025} \\
+    \textbf{\large{\underline{Face Aging Using Conditional GAN — \textnormal{Bronze Medal}}}} & \textit{Feb 2025 -- Apr 2025} \\
     \multicolumn{2}{@{}l}{\href{https://www.kaggle.com/code/adi2606/face-aging-using-conditional-gan}{\texttt{kaggle.com/adi2606/code}}} \\
   \end{tabular*}
   \resumeItemListStart
-      \resumeItem{Built a GAN-based pipeline to generate aged versions of children's faces using Conditional GAN architecture.}
-      \resumeItem{Trained for 50 epochs with final generator loss of 5.9297 and discriminator loss of 0.0082, achieving stable convergence.}
-      \resumeItem{Received a \textbf{Bronze Medal on Kaggle} with \textbf{21+ upvotes}.}
+      \resumeItem{Designed a Conditional GAN pipeline to generate aged versions of children's faces.}
+      \resumeItem{Achieved stable convergence (Generator Loss: 5.93, Discriminator Loss: 0.0082) over 50 epochs.}
       \resumeItem{\textbf{Tech Stack:} Python, GANs, Kaggle.}
   \resumeItemListEnd
   \vspace{5pt}
 
   \item
   \begin{tabular*}{1.0\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
-    \textbf{\large{\underline{CarGoPlus - Car Rental Management System}}} & \textit{Sep 2024 -- Dec 2024} \\
+    \textbf{\large{\underline{CarGoPlus — Car Rental Management System}}} & \textit{Sep 2024 -- Dec 2024} \\
     \multicolumn{2}{@{}l}{\href{https://github.com/EchoSingh/CarGoPlus}{\texttt{github.com/EchoSingh/CarGoPlus}}} \\
   \end{tabular*}
   \resumeItemListStart
-      \resumeItem{Developed a car rental management system with a GUI using C++ and \textbf{wxWidgets}, integrated with a \textbf{MySQL backend}.}
-      \resumeItem{Gained hands-on experience with \textbf{wxWidgets} for creating native desktop interfaces and managing event-driven programming.}
+      \resumeItem{Built a car rental management system with GUI in C++ using \textbf{wxWidgets} and \textbf{MySQL}.}
+      \resumeItem{Implemented native desktop UI with event-driven programming.}
       \resumeItem{\textbf{Technologies:} C++, wxWidgets, MySQL, Visual Studio.}
   \resumeItemListEnd
   \vspace{5pt}
 
 \resumeSubHeadingListEnd
-
-
 
 %-----------ACHIEVEMENTS-----------
 \section{Achievements}
@@ -202,10 +206,6 @@
       \resumeItem{Earned \textbf{7 medals} for high-quality contributions to notebooks and datasets.}
     \resumeItemListEnd
 
-  \resumeSubheading
-    {LeetCode}{Ongoing}
-    {Contest Rating: \textbf{1,531} (Top 35.76\% Globally)}{}
-
 \resumeSubHeadingListEnd
 
 
@@ -214,8 +214,8 @@
 \section*{Technical Skills}
 \vspace{5pt}
 \begin{itemize}[leftmargin=0.15in, label={}]
-    \item \textbf{Languages:} C++, Java, Python, SQL
-    \item\textbf{Frameworks/Libraries:} wxWidgets, Android SDK, Hugging Face Transformers
+    \item \textbf{Languages:} C++, Python 
+    \item\textbf{Frameworks/Libraries:} wxWidgets, Hugging Face Transformers 
     \item \textbf{ML \& Data:} Large Language Models (LLMs), Dataset Curation, Docling, CleanText
     \item \textbf{Tools:} Visual Studio Code, Eclipse, JetBrains Fleet, Kaggle, Google Colab
 \end{itemize}
